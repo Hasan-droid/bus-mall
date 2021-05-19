@@ -1,0 +1,34 @@
+body{
+    background-color: #129995;
+}
+*{
+    transition: all 0.2s;
+}
+img{
+    width:300px;
+    height: 500px;
+  
+   
+    margin:10px 6px 40px 40px;
+    box-shadow: 5px 5px #E64C10;
+    border-radius: 25% 10%;
+}
+
+li{
+    font-size: large;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
+button{
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #BEE3E2;
+    color: #129995;
+
+}
+
+button:hover{
+    background-color: #993812;
+    color: rgb(247, 243, 243);
+}
