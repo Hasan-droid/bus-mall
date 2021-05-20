@@ -8,7 +8,10 @@ let listsdiv = document.getElementById("lists");
 let userValue=-1;
 
 
-let index1, index2, index3;
+let indx1, indx2, indx3;
+let prevIndex1 , prevIndex2 , prevIndex3;
+let viewsArr =[];
+let votesArr=[];
 let count = 0;
 
 results_btn.style.visibility = 'hidden';
@@ -21,7 +24,6 @@ let images_names = ['bag.jpg',
     'bathroom.jpg',
     'boots.jpg',
     'breakfast.jpg',
-    'bubblegum copy.jpg',
     'bubblegum.jpg',
     'chair.jpg',
     'cthulhu.jpg',
@@ -57,65 +59,91 @@ for (let i = 0; i < images_names.length; i++) {
 }
 
 //console.table(pic.all);
+// for (let i = 1; i <= 3; i++) {
+        
+//     let indexname = 'indx';
+//    let num = random(0, pic.all.length - 1);
+//   //  console.log("inside for" ,num)
+//     eval(indexname + i + "=" + num);
+//     // eval(varname+1+"="+pic.all[1].name);
+//     // console.log(pic.all[eval(indexname+i)].path);
+// } 
 
 function renderImages() {
-    for (let i = 1; i <= 3; i++) {
-        let varname = 'image';
-        let indexname = 'index';
-        let num = random(0, pic.all.length - 1)
-        eval(indexname + i + "=" + num);
-        // eval(varname+1+"="+pic.all[1].name);
-        // console.log(pic.all[eval(indexname+i)].path);
-    }
-    image1.src = pic.all[index1].path;
-    image1.title = pic.all[index1].name;
-    pic.all[index1].times++;
+   
+   
+     // console.log("outside for" ,num)
+     while(indx1 === prevIndex1 || indx1 === prevIndex2 || indx1 === prevIndex3 )
+     { indx1=random(0,pic.all.length-1); 
+     }
+    
+     
+      console.log(prevIndex1);
+     image1.src = pic.all[indx1].path;
+     image1.title = pic.all[indx1].name;
+     pic.all[indx1].times++;
+ 
+     
+ 
+     while(indx2 === prevIndex1 || indx2 === prevIndex2 || indx2 === prevIndex3 )
+     {indx2=random(0,pic.all.length-1);}
+ 
+     console.log(prevIndex2);
+     if (indx2 !== indx1) {
+         image2.src = pic.all[indx2].path;
+         image2.title = pic.all[indx2].name;
+         pic.all[indx2].times++;
+     }
+     else if (indx2 === 0) {
+         indx2++;
+         image2.src = pic.all[indx2].path;
+         image2.title = pic.all[indx2].name;
+         pic.all[indx2].times++;
+     }
+     else {
+         indx2--;
+         image2.src = pic.all[indx2].path;
+         image2.title = pic.all[indx2].name;
+         pic.all[indx2].times++;
+     }
+     while(indx3 === prevIndex1 || indx3 === prevIndex2 || indx3 === prevIndex3 )
+     {indx3=random(0,pic.all.length-1); }
+ 
+     console.log(prevIndex3);
 
-    if (index2 != index1) {
-        image2.src = pic.all[index2].path;
-        image2.title = pic.all[index2].name;
-        pic.all[index2].times++;
-    }
-    else if (index2 == 0) {
-        index2++;
-        image2.src = pic.all[index2].path;
-        image2.title = pic.all[index2].name;
-        pic.all[index2].times++;
-    }
-    else {
-        index2--;
-        image2.src = pic.all[index2].path;
-        image2.title = pic.all[index2].name;
-        pic.all[index2].times++;
-    }
+     if (indx3 !== indx1 && indx3 !== indx2) {
+         image3.src = pic.all[indx3].path;
+         image3.title = pic.all[indx3].name;
+         pic.all[indx3].times++;
+     }
+     else if (indx3 === 0) {
+         while (indx3 === indx2 || indx3 === indx1)
+             {indx3++;}
+ 
+         image3.src = pic.all[indx3].path;
+         image3.title = pic.all[indx3].name;
+         pic.all[indx3].times++;
+ 
+     }
+ 
+     else {
+         while (indx3 === indx2 || indx3 === indx1)
+            { indx3--;}
+ 
+         image3.src = pic.all[indx3].path;
+         image3.title = pic.all[indx3].name;
+         pic.all[indx3].times++;
+     }
 
-    if (index3 != index1 && index3 != index2) {
-        image3.src = pic.all[index3].path;
-        image3.title = pic.all[index3].name;
-        pic.all[index3].times++;
-    }
-    else if (index3 === 0) {
-        while (index3 === index2 || index3 === index1)
-            index3++;
-
-        image3.src = pic.all[index3].path;
-        image3.title = pic.all[index3].name;
-        pic.all[index3].times++;
-
-    }
-
-    else {
-        while (index3 === index2 || index3 === index1)
-            index3--;
-
-        image3.src = pic.all[index3].path;
-        image3.title = pic.all[index3].name;
-        pic.all[index3].times++;
-    }
+     console.log(indx1 , indx2 , indx3);
+ 
+     prevIndex1=indx1;
+     prevIndex2=indx2;
+     prevIndex3=indx3;
 }
 
  let numOfClicks=prompt("how many time you want to click ? \n if you press ok it will be 25 times")
- console.log(numOfClicks);
+ //console.log(numOfClicks);
 renderImages();
 
 
@@ -133,37 +161,64 @@ function handleEvent(events)
     else {
         if (events.target.id != 'images') {
             if (events.target.id === image1.id)
-                pic.all[index1].votes++;
+                pic.all[indx1].votes++;
 
             else if (events.target.id === image2.id)
-                pic.all[index2].votes++;
+                pic.all[indx2].votes++;
             else
-                pic.all[index3].votes++;
+                pic.all[indx3].votes++;
         }
         renderImages();
         count++;
         if (count <Number( numOfClicks))
         {
             results_btn.style.visibility='hidden';
-            console.log(count);
+           
         }
         else
         {
             results_btn.style.visibility='visible';
-            console.log(count);
+           
         }
     }
 }
 
-let ulLists=document.createElement('ul');
-listsdiv.appendChild(ulLists);
+// let ulLists=document.createElement('ul');
+// listsdiv.appendChild(ulLists);
 results_btn.addEventListener('click' , handleResultsEvent);
  
 function handleResultsEvent(event)
 {
     for(let i=0 ; i<pic.all.length ; i++){
-        let liE=document.createElement('li');
-        liE.textContent=`${pic.all[i].name} had ${pic.all[i].votes} votes and was seen ${pic.all[i].times} times`;
-        ulLists.appendChild(liE);
+        // let liE=document.createElement('li');
+        // liE.textContent=`${pic.all[i].name} had ${pic.all[i].votes} votes and was seen ${pic.all[i].times} times`;
+        // ulLists.appendChild(liE);
+        viewsArr.push(pic.all[i].times);
+        votesArr.push(pic.all[i].votes);
     }
+    let Charts = document.getElementById('Charts').getContext('2d');
+  let chart = new Chart(Charts, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+      labels: images_names,
+      datasets: [{
+        label: 'Photo\'s Votes',
+        backgroundColor: 'rgb(255, 230, 1)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: votesArr
+      },
+      {
+        label: 'Photo\'s Views',
+        backgroundColor: 'tomato',
+        borderColor: 'rgb(253, 46, 46)',
+        data: viewsArr
+      }]
+    },
+
+    // Configuration options go here
+    options: {}
+  });
 }
