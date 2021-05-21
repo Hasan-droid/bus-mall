@@ -19,6 +19,24 @@ results_btn.style.visibility = 'hidden';
 function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+function setItems(){
+    let picturesItems =JSON.stringify(pic.all);
+    localStorage.setItem('Pics',picturesItems);
+  }
+
+  function getItems(){
+
+    let product = localStorage.getItem('Pics');
+    if(product) {
+      pic.all = JSON.parse(product);
+      // console.log(pic.all);
+  
+      }
+  
+  }
+
+  
 let images_names = ['bag.jpg',
     'banana.jpg',
     'bathroom.jpg',
@@ -39,7 +57,8 @@ let images_names = ['bag.jpg',
     'water-can.jpg',
     'wine-glass.jpg'];
 
-pic.all = [];
+
+    pic.all = [];
 
 function pic(name, extension) {
     this.name = name;
@@ -49,6 +68,9 @@ function pic(name, extension) {
     this.votes = 0;
     pic.all.push(this);
 }
+
+
+getItems();
 
 for (let i = 0; i < images_names.length; i++) {
     let point = images_names[i].indexOf(".");
@@ -181,6 +203,7 @@ function handleEvent(events)
            
         }
     }
+   setItems();
 }
 
 // let ulLists=document.createElement('ul');
@@ -189,13 +212,15 @@ results_btn.addEventListener('click' , handleResultsEvent);
  
 function handleResultsEvent(event)
 {
-    for(let i=0 ; i<pic.all.length ; i++){
+    for(let j=0 ; j<pic.all.length ; j++){
         // let liE=document.createElement('li');
         // liE.textContent=`${pic.all[i].name} had ${pic.all[i].votes} votes and was seen ${pic.all[i].times} times`;
         // ulLists.appendChild(liE);
-        viewsArr.push(pic.all[i].times);
-        votesArr.push(pic.all[i].votes);
+        viewsArr.push(pic.all[j].times);
+      console.log(pic.all[j].name , pic.all[j].times)
+        votesArr.push(pic.all[j].votes);
     }
+     
     let Charts = document.getElementById('Charts').getContext('2d');
   let chart = new Chart(Charts, {
     // The type of chart we want to create
@@ -222,3 +247,4 @@ function handleResultsEvent(event)
     options: {}
   });
 }
+getItems();
