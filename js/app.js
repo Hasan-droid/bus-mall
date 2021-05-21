@@ -19,18 +19,18 @@ results_btn.style.visibility = 'hidden';
 function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
-
+//------------get the renderd iamges data to local storage---------------------
 function setItems(){
     let picturesItems =JSON.stringify(pic.all);
     localStorage.setItem('Pics',picturesItems);
   }
-
+//---------------render the saved qimages data from the local storage--------------
   function getItems(){
 
     let product = localStorage.getItem('Pics');
     if(product) {
       pic.all = JSON.parse(product);
-      // console.log(pic.all);
+      
   
       }
   
@@ -71,30 +71,20 @@ function pic(name, extension) {
 
 
 getItems();
-
+//-----------------get names of images with their extensions---------------------
 for (let i = 0; i < images_names.length; i++) {
     let point = images_names[i].indexOf(".");
     let name = images_names[i].substring(0, point);
     let extension = images_names[i].substring(point, images_names.length);
-    // console.log(name , extension);
-    new pic(name, extension);
+        new pic(name, extension);
 }
 
-//console.table(pic.all);
-// for (let i = 1; i <= 3; i++) {
-        
-//     let indexname = 'indx';
-//    let num = random(0, pic.all.length - 1);
-//   //  console.log("inside for" ,num)
-//     eval(indexname + i + "=" + num);
-//     // eval(varname+1+"="+pic.all[1].name);
-//     // console.log(pic.all[eval(indexname+i)].path);
-// } 
 
+//-------------- show the three images with non duplicates------------------------
 function renderImages() {
    
    
-     // console.log("outside for" ,num)
+//-------------check whether the preious image is the same current one------------    
      while(indx1 === prevIndex1 || indx1 === prevIndex2 || indx1 === prevIndex3 )
      { indx1=random(0,pic.all.length-1); 
      }
@@ -163,19 +153,19 @@ function renderImages() {
      prevIndex2=indx2;
      prevIndex3=indx3;
 }
-
+//------------let the user enter how many times want click on images-----------------
  let numOfClicks=prompt("how many time you want to click ? \n if you press ok it will be 25 times")
- //console.log(numOfClicks);
+ 
 renderImages();
 
 
-//console.log("num of clicks "+numOfClicks)
-
+ 
+//-------if the enterd value was not enterd then make the deaults value 25--------------
 if(numOfClicks === "" ){
     numOfClicks=25;
     alert(`you have ${numOfClicks} clicks`)
 }
- 
+//----------click on images function-----------------
 imgSection.addEventListener('click',handleEvent)
 function handleEvent(events)
 { 
@@ -206,21 +196,18 @@ function handleEvent(events)
    setItems();
 }
 
-// let ulLists=document.createElement('ul');
-// listsdiv.appendChild(ulLists);
+//---------- show results button-----------------------------
 results_btn.addEventListener('click' , handleResultsEvent);
  
 function handleResultsEvent(event)
 {
     for(let j=0 ; j<pic.all.length ; j++){
-        // let liE=document.createElement('li');
-        // liE.textContent=`${pic.all[i].name} had ${pic.all[i].votes} votes and was seen ${pic.all[i].times} times`;
-        // ulLists.appendChild(liE);
+      
         viewsArr.push(pic.all[j].times);
       console.log(pic.all[j].name , pic.all[j].times)
         votesArr.push(pic.all[j].votes);
     }
-     
+    //--------------charts------------------------------ 
     let Charts = document.getElementById('Charts').getContext('2d');
   let chart = new Chart(Charts, {
     // The type of chart we want to create

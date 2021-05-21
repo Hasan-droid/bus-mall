@@ -1,18 +1,40 @@
 body{
-    background-color: #129995;
+    background-color: #F0AC43;
 }
 *{
     transition: all 0.2s;
 }
+
 img{
     width:300px;
     height: 500px;
   
    
-    margin:10px 6px 40px 40px;
-    box-shadow: 5px 5px #E64C10;
+    margin:10px 6px 40px 120px;
+    box-shadow: 5px 5px #5BF08F;
     border-radius: 25% 10%;
 }
+
+h1{
+    text-align:center;
+   font-family:sans-serif;
+   color: #6C32A3;
+  }
+
+a{
+    text-decoration:none;
+    color:#6C32A3;
+  }
+  .bar{
+    background-color:#912BF0;
+     border-radius: 25px;
+    border:  solid 2px #6C32A3;
+  }
+  li{
+    
+    display: inline;
+    margin-right: 10%;
+  }
 
 li{
     font-size: large;
